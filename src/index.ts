@@ -1,7 +1,9 @@
-// Add the properties to the Dashboard
-// This is a continuation of the Challenge, in which you are asked to add
-// the 3 properties image and title to the dashboard based on the
-// properties array
+// Tuple Types [string, string, number]
+// Specific number of items in array and specific item types
+// 1. Replace the contact values to take an array that contains a
+// phone number and email.
+// 2. Check the inferred Type that appears in the Object Type.
+// 3. Overwrite the inferred type to be a Tuple.
 
 const propertyContainer = document.querySelector('.properties') as HTMLElement;
 
@@ -61,11 +63,11 @@ const properties: {
 		code: number;
 		country: string;
 	};
-	contact: string;
+	contact: [number, string];
 	isAvailable: boolean;
 }[] = [
 	{
-		image: '../src/images/colombia-property.jpg',
+		image: 'images/colombia-property.jpg',
 		title: 'Colombian Shack',
 		price: 45,
 		location: {
@@ -74,11 +76,11 @@ const properties: {
 			code: 45632,
 			country: 'Colombia',
 		},
-		contact: 'marywinkle@gmail.com',
+		contact: [+1123495082908, 'marywinkle@gmail.com'],
 		isAvailable: true,
 	},
 	{
-		image: '../src/images/poland-property.jpg',
+		image: 'images/poland-property.jpg',
 		title: 'Polish Cottage',
 		price: 34,
 		location: {
@@ -87,11 +89,11 @@ const properties: {
 			code: 343903,
 			country: 'Poland',
 		},
-		contact: 'garydavis@hotmail.com',
+		contact: [+1123495082908, 'garydavis@hotmail.com'],
 		isAvailable: false,
 	},
 	{
-		image: '../src/images/london-property.jpg',
+		image: 'images/london-property.jpg',
 		title: 'London Flat',
 		price: 23,
 		location: {
@@ -100,7 +102,7 @@ const properties: {
 			code: 35433,
 			country: 'United Kingdom',
 		},
-		contact: 'andyluger@aol.com',
+		contact: [+1123495082908, 'andyluger@aol.com'],
 		isAvailable: true,
 	},
 ];
@@ -110,7 +112,7 @@ showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 
 populateUser(you.isReturning, you.firstName);
 
-//Add the properties
+// Add the properties
 for (let i = 0; i < properties.length; i++) {
 	const card = document.createElement('div');
 	card.classList.add('card');
