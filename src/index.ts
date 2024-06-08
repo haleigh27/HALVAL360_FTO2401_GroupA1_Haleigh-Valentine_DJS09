@@ -1,17 +1,26 @@
-// Function Return Types + Void Types mini-challenge
-// Instead of having a long 'review total 3', can you make the line say '3 reviews', or '1 review'
-// if there is only one? Use a function to do this and assign a type to the functions return.
+// Function Types challenge - Pass the code review
+// 1. Add types to the function that returns the top 2 reviews specifically based on
+// descending order. Make sure to use what you learned in the previous lessons.
+// 2. Add types to the function in this file that shows the reviews when we click the button
 
-import { showReviewTotal, populateUser, showDetails } from './utils';
+import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from './utils';
 import { Price, Country } from './types';
 import { Permissions, LoyaltyUser } from './enums';
 const propertyContainer = document.querySelector('.properties') as HTMLElement;
+const reviewContainer = document.querySelector('.reviews') as HTMLElement;
+const container = document.querySelector('.container') as HTMLElement;
+const button = document.querySelector('button') as HTMLElement;
 const footer = document.querySelector('.footer') as HTMLElement;
 
 let isLoggedIn: boolean;
 
 // Reviews
-const reviews: any[] = [
+const reviews: {
+	name: string;
+	stars: number;
+	loyaltyUser: LoyaltyUser;
+	date: string;
+}[] = [
 	{
 		name: 'Sheia',
 		stars: 5,
@@ -29,7 +38,6 @@ const reviews: any[] = [
 		stars: 4,
 		loyaltyUser: LoyaltyUser.SILVER_USER,
 		date: '27-03-2021',
-		description: 'Great hosts, location was a bit further than said.',
 	},
 ];
 
@@ -113,6 +121,31 @@ for (let i = 0; i < properties.length; i++) {
 	showDetails(you.permissions, card, properties[i].price);
 	propertyContainer.appendChild(card);
 }
+
+//Broken code
+let count = 0;
+function addReviews(
+	array: {
+		name: string;
+		stars: number;
+		loyaltyUser: LoyaltyUser;
+		date: string;
+	}[]
+): void {
+	if (!count) {
+		count++;
+		const topTwo = getTopTwoReviews(array);
+		for (let i = 0; i < topTwo.length; i++) {
+			const card = document.createElement('div');
+			card.classList.add('review-card');
+			card.innerHTML = topTwo[i].stars + ' stars from ' + topTwo[i].name;
+			reviewContainer.appendChild(card);
+		}
+		container.removeChild(button);
+	}
+}
+
+button.addEventListener('click', () => addReviews(reviews));
 
 let currentLocation: [string, string, number] = ['London', '11.03', 17];
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
