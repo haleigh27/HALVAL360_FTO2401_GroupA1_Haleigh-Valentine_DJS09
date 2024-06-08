@@ -1,15 +1,14 @@
-// Any Type
-// 1. Add a description property to Omars review, and give it a value.
-// 2. Next try addressing what TypeScript does not like.
-// 3. Now, imagine we DON'T know what kind of review object we are going to
-// get next.
+// Union Types Challenge
+// 1. Fix the function to show the price per night for each property card only
+// if isLoggedIn is true, or the you object has Permissions. (all permissions should work)
+// 2. See what happens when a null object to be passed to the you objects permissions.
 
 import { showReviewTotal, populateUser } from './utils';
 import { Permissions, LoyaltyUser } from './enums';
 const propertyContainer = document.querySelector('.properties') as HTMLElement;
 const footer = document.querySelector('.footer') as HTMLElement;
 
-let isOpen: boolean;
+let isLoggedIn: boolean;
 
 // Reviews
 const reviews: any[] = [
@@ -30,11 +29,10 @@ const reviews: any[] = [
 		stars: 4,
 		loyaltyUser: LoyaltyUser.SILVER_USER,
 		date: '27-03-2021',
-		description: 'Great hosts, location was a bit further than said',
+		description: 'Great hosts, location was a bit further than said.',
 	},
 ];
 
-// User
 const you = {
 	firstName: 'Bobby',
 	lastName: 'Brown',
@@ -101,8 +99,19 @@ const properties: {
 
 // Functions
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
-
 populateUser(you.isReturning, you.firstName);
+
+let authorityStatus: any;
+
+isLoggedIn = false;
+
+function showDetails(authorityStatus: boolean | Permissions, element: HTMLDivElement, price: number) {
+	if (authorityStatus) {
+		const priceDisplay = document.createElement('div');
+		priceDisplay.innerHTML = price.toString() + '/night';
+		element.appendChild(priceDisplay);
+	}
+}
 
 // Add the properties
 for (let i = 0; i < properties.length; i++) {
@@ -113,6 +122,7 @@ for (let i = 0; i < properties.length; i++) {
 	image.setAttribute('src', properties[i].image);
 	card.appendChild(image);
 	propertyContainer.appendChild(card);
+	showDetails(you.permissions, card, properties[i].price);
 }
 
 let currentLocation: [string, string, number] = ['London', '11.03', 17];
