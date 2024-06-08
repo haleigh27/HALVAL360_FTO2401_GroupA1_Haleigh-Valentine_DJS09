@@ -1,15 +1,13 @@
 console.log('Script loaded');
 
-// Fixing the Website
-
-// Can you fix my code to show 'Welcome back Bobby' in the Nav Bar for
-// our couch surfing website? Do this by assigning types to the parameters
-// we pass to our populateUser function, so that we can be aware of
-// errors in our user objects in the future.
+// Type Assignment and Type Interference
+// add a isOpen variable and assign it the boolean type
 
 const returningUserDisplay = document.querySelector('#returning-user') as HTMLElement;
 const userNameDisplay = document.querySelector('#user') as HTMLElement;
 const reviewTotalDisplay = document.querySelector('#reviews') as HTMLElement;
+
+let isOpen: boolean;
 
 const reviews = [
 	{
