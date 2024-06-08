@@ -1,14 +1,10 @@
-// Tuples challenge
-// 1. Add an array to the variable of currentLocation I have added. This array
-// must have your current location, time, and degrees celcius of your location
-// NOTE: make sure to make this a Tuple, to only allow those types in that
-// structure.
-// 2. Add this visually to a footer on your site
+// Enum Types
+
+import { showReviewTotal, populateUser } from './utils';
 
 const propertyContainer = document.querySelector('.properties') as HTMLElement;
 const footer = document.querySelector('.footer') as HTMLElement;
 
-import { showReviewTotal, populateUser } from './utils';
 let isOpen: boolean;
 
 // Reviews
@@ -39,15 +35,32 @@ const reviews: {
 ];
 
 // User
-const you: {
-	firstName: string;
-	lastName: string;
-	isReturning: boolean;
-	age: number;
-	stayedAt: string[];
-} = {
+// const you: {
+//     firstName: string;
+//     lastName: string;
+//     isReturning: boolean;
+//     age: number;
+//     stayedAt: string[]
+// } = {
+//     firstName: 'Bobby',
+//     lastName: 'Brown',
+//     isReturning: true,
+//     age: 35,
+//     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
+// }
+
+const ADMIN = 'admin';
+const READ_ONLY = 'read-only';
+
+enum Permissions {
+	ADMIN,
+	READ_ONLY,
+}
+
+const you = {
 	firstName: 'Bobby',
 	lastName: 'Brown',
+	permissions: Permissions.ADMIN,
 	isReturning: true,
 	age: 35,
 	stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
@@ -124,7 +137,5 @@ for (let i = 0; i < properties.length; i++) {
 	propertyContainer.appendChild(card);
 }
 
-// use your location, your current time, and the current temperature of your
-// location
-let currentLocation: [string, string, number] = ['London', '11:35', 17];
+let currentLocation: [string, string, number] = ['London', '11.03', 17];
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
