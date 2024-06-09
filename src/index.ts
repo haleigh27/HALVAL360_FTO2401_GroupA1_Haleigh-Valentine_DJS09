@@ -1,12 +1,3 @@
-// Wrapping up our Dashboard
-// add another property card. The Property should have:
-// 1 x picture of a 'Malaysian Hotel' called 'Malia Hotel'
-// It should cost 35/night
-// It's location should be 'Room 4, Malia , Malaysia, 45334'
-// The contact email should be 'lee34@gmail.com'
-// The phone number for the property should be +60349822083
-// It should not be available
-
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from './utils';
 import { Price, Country } from './types';
 import { Review } from './interfaces';
