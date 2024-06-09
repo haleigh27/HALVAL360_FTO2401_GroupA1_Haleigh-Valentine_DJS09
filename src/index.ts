@@ -1,6 +1,5 @@
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from './utils';
-import { Price, Country } from './types';
-import { Review } from './interfaces';
+import { Review, Property } from './interfaces';
 import { Permissions, LoyaltyUser } from './enums';
 const propertyContainer = document.querySelector('.properties') as HTMLElement;
 const reviewContainer = document.querySelector('.reviews') as HTMLElement;
@@ -40,20 +39,6 @@ const you = {
 	age: 35,
 	stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
 };
-
-interface Property {
-	image: string;
-	title: string;
-	price: Price;
-	location: {
-		firstLine: string;
-		city: string;
-		code: number | string;
-		country: Country;
-	};
-	contact: [number, string];
-	isAvailable: boolean;
-}
 
 // Array of Properties
 const properties: Property[] = [
