@@ -1,9 +1,6 @@
-// Classes
-// As with other JavaScript language features, TypeScript adds type
-// annotations and other syntax to allow you to express relationships
-// between classes and other types.
-// 1. Add a Class that will let us create a main image, it should allow us to
-// store the reviews, the src and title.
+// Wrapping up our Dashboard
+// 1. Create All the other interfaces you think are needed for this board
+// 2. Using the Class, visually show the main Image above the review button.
 
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from './utils';
 import { Price, Country } from './types';
@@ -20,7 +17,7 @@ let isLoggedIn: boolean;
 // Reviews
 const reviews: Review[] = [
 	{
-		name: 'Sheia',
+		name: 'Sheila',
 		stars: 5,
 		loyaltyUser: LoyaltyUser.GOLD_USER,
 		date: '01-04-2021',
@@ -48,20 +45,22 @@ const you = {
 	stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
 };
 
-// Array of Properties
-const properties: {
+interface Property {
 	image: string;
 	title: string;
-	price: number;
+	price: Price;
 	location: {
 		firstLine: string;
 		city: string;
-		code: number;
-		country: string;
+		code: number | string;
+		country: Country;
 	};
 	contact: [number, string];
 	isAvailable: boolean;
-}[] = [
+}
+
+// Array of Properties
+const properties: Property[] = [
 	{
 		image: '../src/images/colombia-property.jpg',
 		title: 'Colombian Shack',
@@ -78,7 +77,7 @@ const properties: {
 	{
 		image: '../src/images/poland-property.jpg',
 		title: 'Polish Cottage',
-		price: 34,
+		price: 30,
 		location: {
 			firstLine: 'no 23',
 			city: 'Gdansk',
@@ -91,11 +90,11 @@ const properties: {
 	{
 		image: '../src/images/london-property.jpg',
 		title: 'London Flat',
-		price: 23,
+		price: 25,
 		location: {
 			firstLine: 'flat 15',
 			city: 'London',
-			code: 35433,
+			code: 'SW4 5XW',
 			country: 'United Kingdom',
 		},
 		contact: [+34829374892553, 'andyluger@aol.com'],
@@ -120,16 +119,8 @@ for (let i = 0; i < properties.length; i++) {
 	propertyContainer.appendChild(card);
 }
 
-//Broken code
 let count = 0;
-function addReviews(
-	array: {
-		name: string;
-		stars: number;
-		loyaltyUser: LoyaltyUser;
-		date: string;
-	}[]
-): void {
+function addReviews(array: Review[]): void {
 	if (!count) {
 		count++;
 		const topTwo = getTopTwoReviews(array);
@@ -148,18 +139,7 @@ button.addEventListener('click', () => addReviews(reviews));
 let currentLocation: [string, string, number] = ['London', '11.03', 17];
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°';
 
-//Classes
-// class Car {
-//     make: string
-//     year: number
-//     color: string
-//     constructor(make: string, year: number, color: string) {
-//         this.make = make
-//         this.year = year
-//         this.color = color
-//     }
-// }
-
+// Classes
 class MainProperty {
 	src: string;
 	title: string;
@@ -170,3 +150,17 @@ class MainProperty {
 		this.reviews = reviews;
 	}
 }
+
+let yourMainProperty = new MainProperty('../src/images/italian-property.jpg', 'Italian House', [
+	{
+		name: 'Olive',
+		stars: 5,
+		loyaltyUser: LoyaltyUser.GOLD_USER,
+		date: '12-04-2021',
+	},
+]);
+
+const mainImageContainer = document.querySelector('.main-image') as HTMLElement;
+const image = document.createElement('img');
+image.setAttribute('src', yourMainProperty.src);
+mainImageContainer.appendChild(image);
