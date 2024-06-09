@@ -2,15 +2,16 @@ const reviewTotalDisplay = document.querySelector('#reviews') as HTMLElement;
 const returningUserDisplay = document.querySelector('#returning-user') as HTMLElement;
 const userNameDisplay = document.querySelector('#user') as HTMLElement;
 import { LoyaltyUser, Permissions } from './enums';
+import { Review } from './interfaces';
 
 export function showReviewTotal(value: number, reviewer: string, isLoyalty: LoyaltyUser) {
 	const iconDisplay = LoyaltyUser.GOLD_USER ? '⭐' : '';
 	reviewTotalDisplay.innerHTML =
-		value.toString() + ' Review' + makeMultiple(value) + '| last reviewed by ' + reviewer + ' ' + iconDisplay;
+		value.toString() + ' review' + makeMultiple(value) + ' | last reviewed by ' + reviewer + ' ' + iconDisplay;
 }
 
 export function populateUser(isReturning: boolean, userName: string) {
-	if (isReturning) {
+	if (isReturning == true) {
 		returningUserDisplay.innerHTML = 'back';
 	}
 	userNameDisplay.innerHTML = userName;
@@ -30,20 +31,7 @@ export function makeMultiple(value: number): string {
 	} else return '';
 }
 
-// Broken code
-export function getTopTwoReviews(
-	reviews: {
-		name: string;
-		stars: number;
-		loyaltyUser: LoyaltyUser;
-		date: string;
-	}[]
-): {
-	name: string;
-	stars: number;
-	loyaltyUser: LoyaltyUser;
-	date: string;
-}[] {
+export function getTopTwoReviews(reviews: Review[]): Review[] {
 	const sortedReviews = reviews.sort((a, b) => b.stars - a.stars);
 	return sortedReviews.slice(0, 2);
 }
